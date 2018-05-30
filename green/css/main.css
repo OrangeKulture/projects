@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+}
+
+.main-container {
+    width: 100%;
+    min-height: 100vh;
+    
+}
+
+.top-container {
+    background: cornflowerblue;
+    height: 100vh;
+}
+
+.box-container {height: 35vh;}.bottom-1 {background: goldenrod;}.bottom-2 {background: mediumslateblue;}.bottom-3 {background: orange;}.bottom-4 {background: cyan;}
+
+.btn {
+    margin-top: 25%;
+}
+
+.user {
+    -webkit-transition: all 1.5s ease;  
+    -moz-transition: all 1.5s ease;  
+    -o-transition: all 1.5s ease;  
+    -ms-transition: all 1.5s ease;  
+    transition: all 1.5s ease;
+}
+
+.user-active {
+    height: 65vh;
+}

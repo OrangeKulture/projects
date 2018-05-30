@@ -1,0 +1,69 @@
+doctype html
+html
+    head
+        title   BTC Viewer
+        link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+        link(rel='stylesheet' href='/css/main.css')
+        link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Comfortaa:400,700')
+        link(rel="shortcut icon" href="images/icon.png" type="image/ico")
+        script(src='https://www.gstatic.com/firebasejs/live/3.1/firebase.js')
+
+    body
+        .head
+            .container
+                .logo.text-center
+                    img(src='/images/main_logo.png')
+        
+        .container
+            .main-title.text-center
+                h4  Bitcoin Payment Interface
+            .top-section.text-center
+                .right-section
+                    h5.secTitle BTC Address Generator
+                    .addContent.text-center
+                        .form-group
+                            label(for="agent") Enter Agent ID
+                            input.form-control#agent(type="text" spellcheck="false")
+                            .screen
+                                .newAddress
+                                    .addField#myField(spellcheck="false" contenteditable)
+                                    .copy
+                                        span.msg Copy to Clipboard
+                                button.btn.btn-danger.genBTN Generate New Address
+
+                .left-section
+                    h5.secTitle Address Tracker
+                    #showContent
+
+
+            .bottom-section.text-center
+                h5.secTitle Latest Transactions
+                .txs-container
+                    .title-container
+                        p.first.txt-center Transaction ID
+                        p.second.txt-center Date Created
+                        p.third.txt-center Last Updated
+                        p.fourth.txt-center Status
+                        p.fifth.txt-center BTC
+                        p.sixth.txt-center USD
+                    each item, index in data
+                        .tx-container
+                            p.first= item.id
+                            p.second #{String(new Date(item.created_at)).slice(0,25)}
+                            p.third #{String(new Date(item.updated_at)).slice(0,25)}
+                            p.fourth= item.status
+                            p.fifth #{Math.abs(item.amount.amount)}
+                            p.sixth #{'$'+Math.abs(item.native_amount.amount)}
+            
+        .foot.text-center
+            img(src="images/btc1.png")
+
+
+    script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+    script(src='/bower_components/jquery/dist/jquery.js' type='application/json')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')
+    script(src='/bower_components/bootstrap/dist/js/boostrap.js' type='application/json')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js')
+    script(src='/javascripts/main.js')
+    

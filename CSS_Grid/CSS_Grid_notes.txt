@@ -1,0 +1,124 @@
+Wrapper Element is given the properties, like flex:
+
+.grid-container {
+    display: grid;
+}
+
+
+------------------------------------------------------------------------------
+
+
+We specify the number of columns in the wrapper as well:
+
+.grid-container {
+    grid-template-columns: 20px 50px 60px
+}
+
+OR
+
+.grid-container {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+OR
+
+.grid-container {
+    grid-template-columns: repeat(3,1fr) // first parameter is number of columns, second is the width.
+}
+
+
+------------------------------------------------------------------------------
+
+
+We also specify the rows:
+
+.grid-container {
+    grid-auto-rows: 200px;  // All rows will be 200px, disregarding content inside each element.
+}
+
+OR
+
+.grid-container {
+     grid-auto-rows: minmax(200px, auto)  // If there's no content, use 200px, else, set the row to height from the content
+}
+
+OR
+
+.grid-container {
+    grid-template-rows: 200px 30px 540px 600px;
+}
+
+.grid-container {
+    grid-template-rows: repeat(3, 200px);
+    grid-template-rows: repeat(3, minmax(200px, auto));
+}
+
+
+------------------------------------------------------------------------------
+
+Grid Gap
+
+..grid-container {
+    grid-column-gap: 10px;  // uses margin without affecting the elements, only the columns
+    grid-row-gap: 10px;
+
+    grid-gap: 10px;  // both columns and rows combined
+}
+
+------------------------------------------------------------------------------
+
+Grid Lines
+
+line 1 starts at top or left from the grid.
+
+.myElement {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+its the same as:
+
+.myElement {
+    grid-column: 1 / 3;
+}
+
+
+.myElement {
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+its the same as:
+
+.myElement {
+    grid-row: 2 / 4;
+}
+
+
+------------------------------------------------------------------------------
+
+Nested grids
+
+.myElement {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+------------------------------------------------------------------------------
+
+Span 
+
+.myElement {
+    grid-colum: span 3;  // spans 3 columns since the default start
+}
+
+------------------------------------------------------------------------------
+
+Align & justify
+
+
+align-items: end, start, stretch        // Y axis
+justify-items: end, start,              // X axis
+
+can be applied to parent element (align-items) or the individual child element (align-self)

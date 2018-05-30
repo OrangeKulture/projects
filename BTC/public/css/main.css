@@ -1,0 +1,251 @@
+body {
+    font-family: 'Comfortaa', cursive;
+    background: url('../images/bg_logo.png')no-repeat center 65% #efefef;
+}
+
+p {
+    font-size: 0.8em;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+h5, p {
+    padding: 0;
+    margin: 0;
+}
+
+.head {
+    width: 100%;
+    height: 80px;
+    background: #d9d9d9;
+}
+
+.logo {
+    width: 100%;
+    height: 80px;
+    padding-top: 8px;
+}
+
+.main-title {
+    padding-top: 25px;
+}
+
+.main-title > h4  {
+    color: #6f7072;
+    text-transform: uppercase;
+    font-size: 1.4em;
+    letter-spacing: 1.6px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+
+.txs-container {
+    width: 100%;
+    height: 85%;
+    overflow-y: scroll;
+}
+
+.tx-container, .title-container {
+    display: flex;
+}
+
+.tx-container {
+    padding-top: 15px;
+}
+
+.title-container {
+    padding-top: 20px;
+}
+
+.newAddress {
+    width: 92%;
+    margin: 20px auto;
+    height: 45px;
+    display: flex;
+    padding-top: 25px;
+}
+
+.addField {
+    background: rgba(255, 244, 188,0.5);
+    width: 92%;
+    height: 45px;
+    border: 1px solid rgba(226, 24, 45,0.3);
+    line-height: 45px;
+    text-align: center;
+}
+
+.addField:focus {
+    outline: none;
+}
+
+.addField::-moz-selection {
+    background: transparent;
+}
+
+.addField::selection {
+    background: transparent;
+}
+
+.copy {
+    height: 45px;
+    width: 8%;
+    background: url('../images/copy.png')no-repeat center center #fff;
+    border: 1px solid rgba(226, 24, 45,0.3);
+}
+
+.copy:hover {
+    cursor: pointer;
+}
+
+.msg {
+    font-size: 0.6em;
+    display: inline-block;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    padding: 5px 3px;
+    margin: -15px 0 0 10px;
+    visibility: hidden;
+}
+
+.copy:hover .msg {
+    visibility: visible;
+}
+
+.genBTN {
+    margin-top: 20px;
+    background: rgba(226, 24, 45);
+    outline: none;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.txt-left {
+    text-align: left;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.first {
+    width: 30%;
+}
+.second {
+    width: 20%;
+}
+.third {
+    width: 20%;
+}
+.fourth {
+    width: 10%;
+}
+.fifth {
+    width: 10%;
+}
+.sixth {
+    width: 5%;
+}
+
+
+.top-section {
+    width: 100%;
+    height: 350px;
+    display: flex;
+    margin-top: 20px;
+}
+
+.bottom-section {
+    width: 100%;
+    height: 350px;
+    margin-top: 7px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 6px;
+    border: 1px solid rgba(226, 24, 45,0.1);
+}
+
+.top-section > * {
+    height: 350px;
+    width: 50%;
+    margin: 0 3px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 6px;
+    border: 1px solid rgba(226, 24, 45,0.1);
+}
+
+.addContent {
+    padding-top: 25px;
+}
+
+
+.secTitle {
+    font-size: 1em;
+    text-transform: uppercase;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(226, 24, 45,0.1);
+    font-weight: bold;
+    color: #6f7072;
+}
+
+#agent {
+    width: 60%;
+    margin: 0 auto;
+    border-color: rgba(226, 24, 45,0.1);
+}
+
+
+#agent:focus, #agent:focus {
+    border: 1px solid #e2182d !important;
+    box-shadow: 0 0 3px #e2182d !important;
+    -moz-box-shadow: 0 0 3px #e2182d !important;
+    -webkit-box-shadow: 0 0 3px #e2182d !important;
+    }
+
+.form-group > label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #6f7072;
+}
+
+#showContent {
+    width: 100%;
+    height: 85%;
+    overflow-y: scroll;
+    font-size: 0.7em;
+}
+
+.addTrackItem {
+    width: 100%;
+    height: 35px;
+    background: #e7e7e7;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.t-add {
+    width: 60%;
+}
+
+.t-agent {
+    width: 40%;
+}
+
+.screen {
+    visibility: hidden;
+}
+
+.foot {
+    width: 100%;
+    background: #fff;
+    padding: 10px;
+    margin-top: 32px;
+}
