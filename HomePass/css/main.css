@@ -19,8 +19,32 @@ body {
     justify-content: center;
 }
 
-
 .navCont > h3 {
     letter-spacing: 3px;
     margin-left: 10px;
+}
+
+.mainCont {
+    width: 100%;
+    background: #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.right-col, .left-col {
+    background: seagreen;
+    height: 650px;
+    width: 48%;
+}
+
+.home-list {
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-auto-rows: minmax(50px,auto);
+    grid-gap: 5px;
+}
+
+.home-list > * {
+    background: slategray;
 }
