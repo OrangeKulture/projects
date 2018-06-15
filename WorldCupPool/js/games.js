@@ -28,10 +28,10 @@ $(document).ready(function(){
     const auth = firebase.auth();
 
     // Listeners
-    // logoutBtn.addEventListener('click', e => {
-    //     auth.signOut();
-    //     window.location = "index.html";
-    // })
+    logoutBtn.addEventListener('click', e => {
+        auth.signOut();
+        window.location = "index.html";
+    })
 
     // game1Btn.addEventListener('click', e => {
     //     let score1 = score1Game1.value;
