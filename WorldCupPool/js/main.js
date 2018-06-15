@@ -19,9 +19,11 @@ $(document).ready(function(){
     // Save values
     const logEmail = document.getElementById('log-email');
     const logPwd = document.getElementById('log-pwd');
+    const logBtn = document.getElementById('log-btn');
+    const createName = document.getElementById('create-name');
+    const createLast = document.getElementById('create-last');
     const createEmail = document.getElementById('create-email');
     const createPwd = document.getElementById('create-pwd');
-    const logBtn = document.getElementById('log-btn');
     const createBtn = document.getElementById('create-btn');
     const auth = firebase.auth();
 
@@ -29,20 +31,38 @@ $(document).ready(function(){
     // Listeners
     createBtn.addEventListener('click', e => {
 
+        let name = createName.value;
+        let lastName = createLast.value;
+        let userName = name+" "+lastName;
         let email = createEmail.value;
         let pwd = createPwd.value;
         const auth = firebase.auth();
 
-        const promise = auth.createUserWithEmailAndPassword(email,pwd);
-        promise.catch(e => toastr.warning(e.message));
-        
+        auth.createUserWithEmailAndPassword(email,pwd)
+        .then(user => {
+            let newUser = user.user.uid;
+            dbRef.ref('/profiles/'+newUser+'/info')
+            .set({
+                'display': userName
+            })
+        })
+        .catch(e => {
+            console.log(e.error);
+            toastr.error(e.message);
+        });
+
+
     });
 
     logBtn.addEventListener('click', e => {
         let email = logEmail.value;
         let pwd = logPwd.value;
         
-        auth.signInWithEmailAndPassword(email, pwd);
+        auth.signInWithEmailAndPassword(email, pwd)
+        .catch(e => {
+            console.log(e.code);
+            toastr.error(e.message);
+        })
     })
 
 
@@ -51,7 +71,7 @@ $(document).ready(function(){
             if(firebaseUser){
                 window.location = "games.html";
             }else {
-                // toastr.info('Please sign in to continue');
+                toastr.success('You have been logged out')
             }
         });
 

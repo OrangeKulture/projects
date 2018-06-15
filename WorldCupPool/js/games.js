@@ -15,14 +15,6 @@ $(document).ready(function(){
     // Database reference
     const dbRef = firebase.database();
 
-    //DOM Nodes
-    const score1Game1 = document.getElementById('score1');
-    const score2Game1 = document.getElementById('score2');
-    const score3 = document.getElementById('score3');
-    const score4 = document.getElementById('score4');
-    const game1Btn = document.getElementById('game1-btn');
-    const game2Btn = document.getElementById('game2-btn');
-
     // Save values
     const logoutBtn = document.getElementById('logout');
     const auth = firebase.auth();
@@ -33,20 +25,27 @@ $(document).ready(function(){
         window.location = "index.html";
     })
 
-    // game1Btn.addEventListener('click', e => {
-    //     let score1 = score1Game1.value;
-    //     let score2 = score2Game1.value;
-        
-    //     dbRef.ref("profiles/"+loggedUser+"/Game1")
-    //     .set({
-    //         'RUS': score1,
-    //         'KDZ': score2,
-    //         'time': Date.now()
-    //     })
+    $('.game-btn > button').on('click',(e) => {
+        if(!e) e = window.event;
+        let gameSelect = e.target.id;
+        let score1 = document.getElementById(`g${gameSelect}s1`);
+        let score2 = document.getElementById(`g${gameSelect}s2`);        
+        let myTeam1 = $(`#g${gameSelect}t1`).text();
+        let myTeam2 = $(`#g${gameSelect}t2`).text();
+
+        let myScore1 = score1.value;
+        let myScore2 = score2.value;
 
 
-    // })
+        if(myScore1 === "" || myScore2 === "" || isNaN(myScore1) || isNaN(myScore2)) {
+            toastr.warning('Please fill out the scores before submitting');
+        }else {
+            console.log(`the title is Game${gameSelect}, team 1 is: ${myTeam1}, team 2 is: ${myTeam2}, with score for ${myTeam1}: ${myScore1}, and score for ${myTeam2}: ${myScore2}`)
+        }
 
+
+    })
+    
 
     //Real time listener
     auth.onAuthStateChanged(firebaseUser => {
@@ -55,9 +54,15 @@ $(document).ready(function(){
             // toastr.success('You are now logged in!')
 
             // Populate the board
-            dbRef.ref("profiles/"+loggedUser)
+            // dbRef.ref("profiles/"+loggedUser+"/games")
+            // .on('child_added', (snap) => {
+            //     console.log(snap.val());
+            // })
+
+            dbRef.ref("profiles/"+loggedUser+"/info")
             .on('child_added', (snap) => {
-                console.log(snap.val());
+                let dispName = snap.val();
+                $('#dispUser').text(dispName);
             })
 
         }else {
