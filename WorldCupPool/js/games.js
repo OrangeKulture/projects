@@ -9,6 +9,7 @@ $(document).ready(function(){
         storageBucket: "world-cup-pool-82286.appspot.com",
         messagingSenderId: "152044465811"
     };
+    
     firebase.initializeApp(config);
     let loggedUser = null;
 
@@ -19,15 +20,21 @@ $(document).ready(function(){
     const logoutBtn = document.getElementById('logout');
     const auth = firebase.auth();
 
+    let retArray = localStorage.getItem(loggedUser);
+    let tempArray = [];
+
     // Listeners
     logoutBtn.addEventListener('click', e => {
         auth.signOut();
         window.location = "index.html";
     })
 
+    
+
     $('.game-btn > button').on('click',(e) => {
         if(!e) e = window.event;
         let gameSelect = e.target.id;
+        let gameNumber = `Game${gameSelect}`;
         let score1 = document.getElementById(`g${gameSelect}s1`);
         let score2 = document.getElementById(`g${gameSelect}s2`);        
         let myTeam1 = $(`#g${gameSelect}t1`).text();
@@ -36,13 +43,29 @@ $(document).ready(function(){
         let myScore1 = score1.value;
         let myScore2 = score2.value;
 
-
         if(myScore1 === "" || myScore2 === "" || isNaN(myScore1) || isNaN(myScore2)) {
-            toastr.warning('Please fill out the scores before submitting');
+            toastr.warning('Please fill out the scores correctly before submitting');
         }else {
-            console.log(`the title is Game${gameSelect}, team 1 is: ${myTeam1}, team 2 is: ${myTeam2}, with score for ${myTeam1}: ${myScore1}, and score for ${myTeam2}: ${myScore2}`)
-        }
 
+            dbRef.ref(`profiles/${loggedUser}/games/${gameNumber}`)
+            .set({
+                [myTeam1]: myScore1,
+                [myTeam2]: myScore2,
+                'time': Date.now(),
+            });
+
+            if(retArray===null){
+                tempArray.push(gameNumber);
+                localStorage.setItem(loggedUser,JSON.stringify(tempArray));
+                return true;
+            }else {
+                tempArray = JSON.parse(retArray);
+                tempArray.push(gameNumber);
+                localStorage.setItem(loggedUser,JSON.stringify(tempArray));
+            }
+
+            toastr.success('Your results have been saved!');
+        }
 
     })
     
@@ -51,13 +74,17 @@ $(document).ready(function(){
     auth.onAuthStateChanged(firebaseUser => {
         if(firebaseUser){
             loggedUser = firebaseUser.uid;
-            // toastr.success('You are now logged in!')
+            toastr.success('You are now logged in!')
 
-            // Populate the board
-            // dbRef.ref("profiles/"+loggedUser+"/games")
-            // .on('child_added', (snap) => {
-            //     console.log(snap.val());
-            // })
+            // Games which have already been predicted are disabled
+            let tempBoard = localStorage.getItem(loggedUser);
+            let board = JSON.parse(tempBoard);
+            for(let i =0;i<board.length;i++){
+                let field = board[i].slice(4);
+                $(`#g${field}s1`).prop('disabled',true);
+                $(`#g${field}s2`).prop('disabled',true);
+                $(`#${field}`).prop('disabled',true);
+            }
 
             dbRef.ref("profiles/"+loggedUser+"/info")
             .on('child_added', (snap) => {
